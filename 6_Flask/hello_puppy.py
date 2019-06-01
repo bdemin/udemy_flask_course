@@ -16,5 +16,10 @@ def info():
 def puppy(name):
     return "<h1>This is a page for {}</h1>".format(name)
 
+
+@app.route('/puppy_debug/<name>')
+def letter(name):
+    return "100th letter: {}".format(name[100])
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug = True)
