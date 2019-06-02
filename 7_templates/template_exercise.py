@@ -1,23 +1,28 @@
-# Set up your imports and your flask app.
+from flask import Flask, render_template, request
+
+
+app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # This home page should have the form.
-    pass
+    return render_template('index.html')
 
+@app.route('/redirect')
+def redirect():
+    upper_flag = False
+    lower_flag = False
+    num_flag = False
 
-# This page will be the page after the form
-@app.route('/report')
-def report():
-    # Check the user name for the 3 requirements.
+    username = request.args.get('username')
 
-    # HINTS:
-    # https://stackoverflow.com/questions/22997072/how-to-check-if-lowercase-letters-exist/22997094
-    # https://stackoverflow.com/questions/26515422/how-to-check-if-last-character-is-integer-in-raw-input
+    upper_flag = any(letter.isupper() for letter in username)
+    lower_flag = any(letter.islower() for letter in username)
+    num_flag = username[-1].isdigit()
 
-    # Return the information to the report page html.
-    pass
+    flag = lower_flag and upper_flag and num_flag
+    
+    return render_template('redirect.html', flag = flag, upper_flag = upper_flag,
+                            lower_flag = lower_flag, num_flag = num_flag)
 
 if __name__ == '__main__':
-    # Fill this in!
-    pass
+    app.run(debug=True)
