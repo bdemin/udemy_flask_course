@@ -1,22 +1,19 @@
-# Set up your imports here!
-# import ...
+from flask import Flask
 
 
-@app.route('') # Fill this in!
+app = Flask(__name__)
+
+@app.route('/')
 def index():
-    # Welcome Page
-    # Create a generic welcome page.
-    pass
+    return '<h1>This is a welcome page!</h1>'
 
-@app.route('') # Fill this in!
+@app.route('/<name>') # Fill this in!
 def puppylatin(name):
-    # This function will take in the name passed
-    # and then use "puppy-latin" to convert it!
-
-    # HINT: Use indexing and concatenation of strings
-    # For Example: "hello"+" world" --> "hello world"
-    pass
+    if name[-1] == 'y':
+        new_name = name[:-2] + 'iful'
+    else:
+        new_name = name + 'y'
+    return "The name of the puppy is: {}".format(new_name)
 
 if __name__ == '__main__':
-    # Fill me in!
-    pass
+    app.run()
