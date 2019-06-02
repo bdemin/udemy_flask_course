@@ -10,7 +10,7 @@ def index():
 @app.route('/<name>') # Fill this in!
 def puppylatin(name):
     if name[-1] == 'y':
-        new_name = name[:-2] + 'iful'
+        new_name = name[:-1] + 'iful'
     else:
         new_name = name + 'y'
     return "The name of the puppy is: {}".format(new_name)
